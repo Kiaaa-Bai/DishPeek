@@ -1,0 +1,11 @@
+rules_version = '2';
+
+// The app never reads or writes Firestore directly. Only the Cloud Functions
+// do, with admin access, so every client request is denied here.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

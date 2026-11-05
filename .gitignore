@@ -1,0 +1,13 @@
+.DS_Store
+**/.DS_Store
+
+## Xcode user settings
+xcuserdata/
+**/xcuserdata/
+
+## Firebase app config (repo is public)
+GoogleService-Info.plist
+
+## Firebase CLI
+.firebase/
+*-debug.log
