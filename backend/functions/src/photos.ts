@@ -6,6 +6,8 @@
 // These are typical photos, not this restaurant's. The restaurant's own Google photos
 // may not be matched to dishes by an AI: Google Maps terms forbid creating content from them.
 
+import * as logger from "firebase-functions/logger";
+
 export type DishQuery = {
   id: string;
   originalName: string;
@@ -34,7 +36,7 @@ export async function findPhotos(dishes: DishQuery[], finders: PhotoFinder[]): P
       Object.assign(found, await finder.find(missing));
     } catch (error) {
       // One finder failing should not cost the pictures another can still find.
-      console.warn(`${finder.name} photo finder failed`, error);
+      logger.warn(`${finder.name} photo finder failed`, error);
     }
   }
   return found;

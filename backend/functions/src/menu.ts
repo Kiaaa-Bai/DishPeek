@@ -10,8 +10,8 @@
 // The free AI Studio key queued at busy hours: 14–24 s before the first word, even for a three-word
 // request (measured 2026-10-26).
 
-import { GoogleGenAI } from "@google/genai";
 import * as logger from "firebase-functions/logger";
+import { vertexAI } from "./vertex";
 
 export const MENU_MODEL = "gemini-3.5-flash-lite";
 
@@ -54,16 +54,11 @@ function lineListing(lines: MenuLine[]): string {
     .join("\n");
 }
 
-function projectId(): string {
-  return process.env.GCLOUD_PROJECT ?? JSON.parse(process.env.FIREBASE_CONFIG ?? "{}").projectId;
-}
-
 // One request to Gemini: instructions, the text, the photo when the app sent one, and the JSON shape
 // the answer must have. Returns the parsed answer.
 async function ask(label: string, instructions: string, text: string, photo: string | undefined, schema: object) {
-  const ai = new GoogleGenAI({ vertexai: true, project: projectId(), location: "global" });
   const parts = photo ? [{ text }, { inlineData: { data: photo, mimeType: "image/jpeg" } }] : [{ text }];
-  const response = await ai.models.generateContent({
+  const response = await vertexAI().models.generateContent({
     model: MENU_MODEL,
     contents: [{ role: "user", parts }],
     config: { systemInstruction: instructions, responseMimeType: "application/json", responseJsonSchema: schema },

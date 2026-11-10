@@ -21,7 +21,7 @@ enum Backend {
 
     // MARK: Read a menu
 
-    struct ScanRequest: Encodable {
+    nonisolated struct ScanRequest: Encodable {
         var lines: [MenuText]
         var targetLanguage: String
         var photo: String?          // the menu photo as base64 JPEG, so Gemini can fix what the reader missed
@@ -37,7 +37,7 @@ enum Backend {
 
     // scanMenu only returns what the screens show first. This asks for the rest of each dish
     // once the menu is on screen: same lines and photo, plus the dishes it found.
-    struct DishToExplain: Encodable {
+    nonisolated struct DishToExplain: Encodable {
         var id: String
         var originalName: String
         var name: String
@@ -45,7 +45,7 @@ enum Backend {
         var contains: [Allergen]
     }
 
-    struct ExplainRequest: Encodable {
+    nonisolated struct ExplainRequest: Encodable {
         var lines: [MenuText]
         var targetLanguage: String
         var photo: String?
@@ -80,7 +80,7 @@ enum Backend {
 
     // MARK: Redraw the menu
 
-    struct RedrawRequest: Encodable {
+    nonisolated struct RedrawRequest: Encodable {
         var photo: String
         var targetLanguage: String
         var aspectRatio: String
@@ -104,14 +104,14 @@ enum Backend {
 
     // MARK: Dish photos
 
-    struct PhotoQuery: Encodable {
+    nonisolated struct PhotoQuery: Encodable {
         var id: String
         var originalName: String
         var name: String
         var wikiTitle: String?
     }
 
-    struct PhotosRequest: Encodable {
+    nonisolated struct PhotosRequest: Encodable {
         var dishes: [PhotoQuery]
     }
 
@@ -134,7 +134,7 @@ enum Backend {
 
     // MARK: Find the restaurant
 
-    struct PlaceRequest: Encodable {
+    nonisolated struct PlaceRequest: Encodable {
         var latitude: Double
         var longitude: Double
         var languageCode: String
@@ -153,13 +153,13 @@ enum Backend {
 
     // MARK: What's popular there
 
-    struct DishRef: Encodable {
+    nonisolated struct DishRef: Encodable {
         var id: String
         var originalName: String
         var name: String
     }
 
-    struct PopularityRequest: Encodable {
+    nonisolated struct PopularityRequest: Encodable {
         var placeId: String
         var placeName: String
         var latitude: Double
@@ -182,7 +182,7 @@ enum Backend {
 
     // MARK: Count an order
 
-    struct OrderRequest: Encodable {
+    nonisolated struct OrderRequest: Encodable {
         var placeId: String
         var dishIds: [String]
     }

@@ -2,19 +2,10 @@ import Foundation
 
 // Language codes are BCP 47: "ko", "en", "zh-Hans", "ja".
 enum Languages {
-    // Languages the interface ships in. Menus can be in any language Vision and Gemini read.
-    static let supported = ["en", "zh-Hans", "zh-Hant", "ja", "ko", "es", "fr", "de", "th", "vi"]
-
     // The user's language: the one the interface is showing in right now.
+    // Menus can be in any language Vision and Gemini read.
     static var user: String {
         Bundle.main.preferredLocalizations.first ?? "en"
-    }
-
-    // A language's own name for itself, for the language switch: "한국어", "English", "日本語".
-    static func ownName(_ code: String) -> String {
-        let locale = Locale(identifier: code)
-        let name = locale.localizedString(forIdentifier: code) ?? code
-        return name.prefix(1).uppercased(with: locale) + name.dropFirst()
     }
 
     // A language's name in the user's language: "Korean", "韩语".

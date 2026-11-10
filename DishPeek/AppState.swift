@@ -15,7 +15,8 @@ enum MenuMode {
 }
 
 // Everything the app remembers while it runs.
-// Nothing is saved to disk yet: quit the app to reset it for the next tester.
+// Only the food choices and the redraw switch are saved on the phone (UserDefaults);
+// the menu and the order reset when the app quits.
 @Observable
 class AppState {
     var path: [Route] = []
@@ -99,26 +100,6 @@ class AppState {
         if !order.contains(dish.id) {
             order.append(dish.id)
         }
-    }
-
-    // Short line for the "Your food" chip on the menu.
-    var preferenceSummary: String {
-        if !hasSetPreferences {
-            return String(localized: "Anything you don't eat?")
-        }
-        var parts: [String] = []
-        let avoided = Allergen.allCases.filter { avoid.contains($0) }
-        if !avoided.isEmpty {
-            let list = avoided.map { $0.title }.formatted(.list(type: .and))
-            parts.append(String(localized: "No \(list)", comment: "Foods the user avoids, e.g. No shellfish and pork"))
-        }
-        if let spice {
-            parts.append(String(localized: "Spice: \(spice.title)"))
-        }
-        if parts.isEmpty {
-            return String(localized: "You eat everything")
-        }
-        return parts.joined(separator: ", ")
     }
 
     // What this user avoids that the dish might have, with why: one per choice, as the choice

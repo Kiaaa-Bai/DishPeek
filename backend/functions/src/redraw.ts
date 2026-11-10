@@ -7,7 +7,7 @@
 // Tested 2026-10-26 on 10 menus: Pro kept all 92 readable prices, about 31 s and $0.14 an image;
 // Nano Banana was slower and changed prices on a dense menu.
 
-import { GoogleGenAI } from "@google/genai";
+import { vertexAI } from "./vertex";
 
 export const REDRAW_MODEL = "gemini-3-pro-image";
 
@@ -34,10 +34,6 @@ Write these lines exactly as given here (printed line → what to write instead)
 ${translations.map((t) => `"${t.original}" → "${t.translated}"`).join("\n")}
 Translate every other line yourself.`;
 
-function projectId(): string {
-  return process.env.GCLOUD_PROJECT ?? JSON.parse(process.env.FIREBASE_CONFIG ?? "{}").projectId;
-}
-
 export type Redrawn = {
   image: string; // base64
   mimeType: string;
@@ -45,9 +41,8 @@ export type Redrawn = {
 
 // photo: base64 JPEG. language: BCP 47 code. aspectRatio: one of ASPECT_RATIOS.
 export async function redrawMenu(photo: string, language: string, aspectRatio: string, translations: Translation[]): Promise<Redrawn> {
-  const ai = new GoogleGenAI({ vertexai: true, project: projectId(), location: "global" });
   const languageName = new Intl.DisplayNames(["en"], { type: "language" }).of(language) ?? language;
-  const response = await ai.models.generateContent({
+  const response = await vertexAI().models.generateContent({
     model: REDRAW_MODEL,
     contents: [
       {

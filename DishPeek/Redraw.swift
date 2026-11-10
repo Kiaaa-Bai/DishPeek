@@ -47,7 +47,7 @@ enum Redraw {
         let read = lines.map { pairs($0.text) }
         var candidates: [(dish: String, line: Int, score: Double)] = []
         for dish in dishes {
-            let wanted = [dish.coverText, dish.lineTranslation, dish.name].map(pairs)
+            let wanted = [dish.coverText, dish.lineTranslation, dish.name].map { pairs($0) }
             for (index, have) in read.enumerated() {
                 let score = wanted.map { similarity($0, have) }.max() ?? 0
                 if score >= 0.5 {
