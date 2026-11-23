@@ -30,26 +30,56 @@ export const ASPECT_RATIOS = ["1:1", "2:3", "3:2", "3:4", "4:3", "4:5", "5:4", "
 // A line as printed, and what to write in its place.
 export type Translation = { original: string; translated: string };
 
-const prompt = (language: string, translations: Translation[]) => `This is a photo of a restaurant menu. Translate the menu's text into ${language}
-and give back the same photo with the translation printed in place of the original words.
+// Kia, 2026-11-22: the redraw still often showed the original words next to the translation. The rule
+// now comes first, the restaurant's name is no longer an exception (it left foreign text on the menu),
+// every original line is named as something that must disappear, the model is shown wrong and right
+// versions of one of this menu's own lines (Kia asked for counter-examples), and it checks before answering.
+const prompt = (language: string, translations: Translation[]) => `Redraw this restaurant menu photo so that ALL of its words are in ${language}, and ONLY in ${language}.
 
-Rules:
-- Replace the words, don't add to them: erase each original line and write only its ${language} translation
-  in its place. The finished menu shows ${language} only, never the original words next to the translation.
-  The only things kept as printed are the restaurant's name, numbers and currency signs.
-- Copy every number exactly as printed: prices, decimals, separators, currency signs and item numbers.
+The most important rule: every word in the original language must be gone from the picture. Erase the
+original words completely and write the ${language} translation in exactly the same place. Never show
+the original and the translation side by side, above each other, or in brackets. The finished menu must
+look as if it had been printed in ${language} from the start.
+
+${examples(language, translations)}
+
+Other rules:
+- Translate everything with words: the restaurant's name (translate or transliterate it), section titles,
+  dish names, descriptions, notes and signs.
+- Keep numbers and currency signs exactly as printed: prices, decimals, separators and item numbers.
   Never change, add or remove a digit.
 - Keep every line where it is, in the same order. Do not add dishes and do not leave any out.
 - Match the original lettering: handwriting stays handwriting, chalk stays chalk, and keep the size,
   colour, weight and slant of each line.
 - Change nothing that is not text: the paper or board, frame, food photos, lighting, angle and crop.
 - Hard-to-read handwriting still gets translated, from the list below or your best reading of it.
-  Leave a line untouched only if you cannot make out any of it.
 
-The list below says what to write in place of each line. Its printed lines were read by OCR and may be
-misspelled: match each one to the line on the photo it most likely is.
+What to write in place of each printed line (the printed lines were read by OCR and may be misspelled;
+match each one to the line on the photo it most likely is). The text on the left must NOT appear anywhere
+in the finished picture; only the text on the right does:
 ${translations.map((t) => `"${t.original}" → "${t.translated}"`).join("\n")}
-Translate every other line yourself.`;
+Translate every other line yourself in the same way.
+
+Before answering, look over the whole picture once more: if any word in the original language is still
+visible, erase it and write its ${language} translation there instead.`;
+
+// Wrong and right versions of one line, taken from this menu so the model sees its own words: the
+// mistakes it made before (original kept beside, above or in brackets, or left untranslated) and the fix.
+// Falls back to a made-up German line when the menu gave no translations.
+function examples(language: string, translations: Translation[]): string {
+  // A line with words only reads clearest: a price in it would show up twice in the wrong examples.
+  const usable = translations.filter((t) => t.original.trim() && t.translated.trim() && t.original.trim() !== t.translated.trim());
+  const sample = usable.find((t) => !/\d/.test(t.original)) ?? usable[0];
+  const original = sample?.original.trim() ?? "Schweinebraten  9,50";
+  const translated = sample?.translated.trim() ?? `(that dish's name in ${language})  9,50`;
+  return `For example, for the printed line "${original}":
+WRONG: "${original}  ${translated}"   (the original kept next to the translation)
+WRONG: "${original}" with "${translated}" written above or below it   (both kept, stacked)
+WRONG: "${translated} (${original})"   (the original kept in brackets)
+WRONG: "${original}"   (left as printed, not translated)
+RIGHT: "${translated}"   (only the ${language} text, in the same place and lettering, numbers unchanged)
+Do the same for every line on the menu.`;
+}
 
 export type Redrawn = {
   image: string; // base64
