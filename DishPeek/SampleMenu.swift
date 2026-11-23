@@ -1,0 +1,142 @@
+import Foundation
+
+// A ready-made scan of Myeongdong Kyoja's menu, Korean to English.
+// Used when there is no network or backend, so the app always has something to show.
+// It has the same shape as what the backend sends back for a real photo.
+enum SampleMenu {
+    static let place = Place(
+        id: "sample-myeongdong-kyoja",
+        name: "Myeongdong Kyoja",
+        area: "Myeong-dong",
+        category: "Korean noodles",
+        distanceMeters: 40,
+        rating: 4.6,
+        ratingCount: 312
+    )
+
+    static let menu = ScannedMenu(
+        sourceLanguage: "ko",
+        targetLanguage: "en",
+        currency: "KRW",
+        title: Bilingual(original: "명동교자", translated: "Myeongdong Kyoja"),
+        footer: Bilingual(original: "모든 메뉴 포장 가능", translated: "Everything is available to go"),
+        orderPhrase: Bilingual(original: "주문할게요", translated: "I'd like to order"),
+        totalWord: Bilingual(original: "합계", translated: "Total"),
+        defaultQuestion: Bilingual(original: "뭐 들어가요?", translated: "What's in it?"),
+        dishes: [
+            Dish(
+                id: "kalguksu",
+                printed: "칼국수",
+                originalName: "칼국수",
+                pronunciation: "kal-guk-su",
+                priceText: "11,000",
+                price: 11000,
+                name: "Kalguksu",
+                lineTranslation: "Knife-cut noodles",
+                summary: "Knife-cut noodle soup",
+                whatItIs: "Chicken broth, minced meat, zucchini",
+                details: "Hand-cut wheat noodles in chicken broth with minced meat and zucchini. Mild.",
+                contains: [.gluten],
+                unsure: [UnsureAllergen(allergen: .shellfish, why: "Some kalguksu uses clam broth. This one lists chicken.")],
+                amount: Bilingual(original: "1개", translated: "×1"),
+                question: Bilingual(original: "조개 들어가요?", translated: "Does it have clams?"),
+                photos: ["kalguksu-table", "kalguksu"],
+                photoSource: .restaurant(count: 86),
+                knownFor: true,
+                dishPeekOrders: 31
+            ),
+            Dish(
+                id: "mandu",
+                printed: "만두",
+                originalName: "만두",
+                pronunciation: "man-du",
+                priceText: "11,000",
+                price: 11000,
+                name: "Mandu",
+                lineTranslation: "Dumplings",
+                summary: "Steamed dumplings",
+                whatItIs: "Pork and vegetable, 5 pieces",
+                details: "Steamed dumplings filled with pork and vegetables. 5 pieces, good to share.",
+                contains: [.pork, .gluten],
+                amount: Bilingual(original: "1접시", translated: "×1 plate"),
+                photos: ["mandu"],
+                photoSource: .typical,
+                knownFor: true,
+                dishPeekOrders: 12
+            ),
+            Dish(
+                id: "bibim-guksu",
+                printed: "비빔국수",
+                originalName: "비빔국수",
+                pronunciation: "bi-bim-guk-su",
+                priceText: "11,000",
+                price: 11000,
+                name: "Bibim-guksu",
+                lineTranslation: "Spicy cold noodles",
+                summary: "Spicy cold noodles",
+                whatItIs: "Chili sauce, cucumber, sesame",
+                details: "Cold wheat noodles tossed in sweet chili sauce with cucumber and sesame.",
+                spiceTip: "Sweet chili sauce. Ask for less if you like.",
+                isSpicy: true,
+                isCold: true,
+                contains: [.gluten],
+                amount: Bilingual(original: "1개", translated: "×1"),
+                question: Bilingual(original: "많이 매워요?", translated: "Is it very spicy?"),
+                photos: ["bibim-guksu"],
+                photoSource: .typical,
+                dishPeekOrders: 4
+            ),
+            Dish(
+                id: "kongguksu",
+                printed: "콩국수 (여름)",
+                originalName: "콩국수",
+                pronunciation: "kong-guk-su",
+                priceText: "12,000",
+                price: 12000,
+                name: "Kongguksu",
+                lineTranslation: "Soy milk noodles (summer)",
+                summary: "Cold soy milk noodles",
+                whatItIs: "Summer only, nutty and plain",
+                details: "Wheat noodles in chilled, nutty soy milk broth. Summer only.",
+                isCold: true,
+                contains: [.gluten],
+                amount: Bilingual(original: "1개", translated: "×1"),
+                question: Bilingual(original: "오늘 콩국수 돼요?", translated: "Do you have kongguksu today?"),
+                photos: ["kongguksu"],
+                photoSource: .typical,
+                dishPeekOrders: 1
+            ),
+            Dish(
+                id: "gonggibap",
+                printed: "공기밥",
+                originalName: "공기밥",
+                pronunciation: "gong-gi-bap",
+                priceText: "1,000",
+                price: 1000,
+                name: "Gonggi-bap",
+                lineTranslation: "Bowl of rice",
+                summary: "A bowl of rice",
+                whatItIs: "Plain steamed rice",
+                details: "A bowl of plain steamed rice. Locals add it to the last of the kalguksu broth.",
+                amount: Bilingual(original: "1개", translated: "×1"),
+                isMainDish: false
+            ),
+            Dish(
+                id: "sari",
+                printed: "사리 추가",
+                originalName: "사리 추가",
+                pronunciation: "sa-ri chu-ga",
+                priceText: "2,000",
+                price: 2000,
+                name: "Sari chuga",
+                lineTranslation: "Extra noodles",
+                summary: "Extra noodles",
+                whatItIs: "One more portion of noodles",
+                details: "One more portion of noodles for your soup.",
+                contains: [.gluten],
+                amount: Bilingual(original: "1개", translated: "×1"),
+                isMainDish: false
+            ),
+        ]
+    )
+}

@@ -1,0 +1,150 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "CFBundleDisplayName": {
+      "comment": "App name on the home screen",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek"
+          }
+        }
+      }
+    },
+    "NSCameraUsageDescription": {
+      "comment": "Why the app asks for the camera",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek nutzt die Kamera, um die Speisekarte vor dir zu lesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek uses the camera to read the menu in front of you."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek usa la cámara para leer el menú que tienes delante."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek utilise l'appareil photo pour lire le menu devant vous."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek は目の前のメニューを読み取るためにカメラを使用します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek은 눈앞의 메뉴를 읽기 위해 카메라를 사용해요."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek ใช้กล้องเพื่ออ่านเมนูตรงหน้าคุณ"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek dùng camera để đọc thực đơn trước mặt bạn."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek 使用相机读取你面前的菜单。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek 使用相機讀取你面前的菜單。"
+          }
+        }
+      }
+    },
+    "NSLocationWhenInUseUsageDescription": {
+      "comment": "Why the app asks for location",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek nutzt deinen Standort, um das Restaurant zu finden, in dem du bist, und seine Bewertung und beliebten Gerichte zu zeigen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek uses your location to find the restaurant you are in, so it can show its rating and popular dishes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek usa tu ubicación para encontrar el restaurante en el que estás y mostrar su valoración y sus platos populares."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek utilise votre position pour trouver le restaurant où vous êtes et afficher sa note et ses plats populaires."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek は今いるレストランを見つけて、評価や人気の料理を表示するために位置情報を使用します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek은 지금 있는 식당을 찾아 평점과 인기 메뉴를 보여 주기 위해 위치를 사용해요."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek ใช้ตำแหน่งของคุณเพื่อหาร้านที่คุณอยู่ และแสดงคะแนนกับเมนูยอดนิยม"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek dùng vị trí của bạn để tìm nhà hàng bạn đang ở và hiển thị đánh giá cùng các món phổ biến."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek 使用你的位置找到你所在的餐厅，以显示它的评分和热门菜。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DishPeek 使用你的位置找到你所在的餐廳，以顯示它的評分和熱門菜。"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
